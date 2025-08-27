@@ -106,12 +106,12 @@ const Header = ({ onNavigate, activeSection }: HeaderProps) => {
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={(e) => { setIsMobileMenuOpen(!isMobileMenuOpen); (e.currentTarget as HTMLButtonElement).blur(); }}
                 className={`${
                   isScrolled 
                     ? 'text-foreground hover:text-accent' 
                     : 'text-primary-foreground hover:text-accent drop-shadow-sm'
-                }`}
+                } bg-transparent hover:bg-transparent focus-visible:ring-0 focus-visible:outline-none focus-visible:ring-offset-0 active:bg-transparent`}
               >
                 {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </Button>

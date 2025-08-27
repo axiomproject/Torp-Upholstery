@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
@@ -9,6 +9,19 @@ interface HeaderProps {
 
 const Header = ({ onNavigate, activeSection }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      setIsScrolled(currentScrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { id: 'hero', label: 'FRONT PAGE' },
@@ -24,13 +37,19 @@ const Header = ({ onNavigate, activeSection }: HeaderProps) => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md shadow-header">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
+      isScrolled 
+        ? 'bg-background/95 backdrop-blur-md shadow-header' 
+        : 'bg-transparent'
+    }`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className={`flex items-center justify-between transition-smooth ${
+          isScrolled ? 'h-16' : 'h-20'
+        }`}>
           {/* Logo placeholder */}
           <div className="flex-shrink-0">
-            <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">L</span>
+            <div className={`${isScrolled ? 'w-12 h-12' : 'w-14 h-14'} gradient-primary rounded-lg flex items-center justify-center transition-smooth`}>
+              <span className={`text-primary-foreground font-bold ${isScrolled ? 'text-xl' : 'text-2xl'} transition-smooth`}>L</span>
             </div>
           </div>
 
@@ -43,7 +62,9 @@ const Header = ({ onNavigate, activeSection }: HeaderProps) => {
                 className={`text-sm font-medium transition-fast hover:text-accent ${
                   activeSection === item.id
                     ? 'text-accent border-b-2 border-accent'
-                    : 'text-foreground'
+                    : isScrolled
+                    ? 'text-foreground'
+                    : 'text-primary-foreground drop-shadow-sm'
                 }`}
               >
                 {item.label}
@@ -57,6 +78,11 @@ const Header = ({ onNavigate, activeSection }: HeaderProps) => {
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`${
+                isScrolled 
+                  ? 'text-foreground hover:text-accent' 
+                  : 'text-primary-foreground hover:text-accent drop-shadow-sm'
+              }`}
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </Button>
@@ -66,7 +92,7 @@ const Header = ({ onNavigate, activeSection }: HeaderProps) => {
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background border-t">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-background/95 backdrop-blur-md border-t border-accent/20">
               {navItems.map((item) => (
                 <button
                   key={item.id}

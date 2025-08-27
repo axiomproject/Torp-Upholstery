@@ -83,21 +83,17 @@ const ContactSection = () => {
           <h3 className="text-2xl font-serif font-semibold text-primary mb-8 text-center">Our Location</h3>
           <Card className="shadow-elegant border-0">
             <CardContent className="p-0">
-              {/* Placeholder for map - would integrate with real map service */}
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-16 h-16 text-accent mx-auto mb-4" />
-                  <h4 className="text-xl font-semibold text-primary mb-2">Torp Upholstery</h4>
-                  <p className="text-muted-foreground">
-                    Visit us at our location
-                  </p>
-                  <Button 
-                    className="mt-4 gradient-accent text-accent-foreground"
-                    onClick={() => window.open('https://www.google.com/maps/place/Torp+Upholstery/data=!4m2!3m1!1s0x0:0xa5b57ba0fe81f5a4?sa=X&ved=1t:2428&hl=en-NO&ictx=111', '_blank')}
-                  >
-                    Get Directions
-                  </Button>
-                </div>
+              <div className="aspect-video rounded-lg overflow-hidden">
+                <iframe
+                  title="Torp Upholstery Location"
+                  src="https://www.google.com/maps?q=59.237583,11.0115354&z=17&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </CardContent>
           </Card>
@@ -182,9 +178,8 @@ const ContactSection = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-primary mb-2">Office Address</h4>
                       <p className="text-muted-foreground">
-                        123 Professional Avenue, Suite 456<br />
-                        Business City, BC 12345<br />
-                        United States
+                      Roald Amundsens vei 101,<br />
+                      1658 Torp, Norway
                       </p>
                     </div>
                   </div>
@@ -216,9 +211,7 @@ const ContactSection = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-primary mb-2">Email Addresses</h4>
                       <p className="text-muted-foreground">
-                        General: info@company.com<br />
-                        Sales: sales@company.com<br />
-                        Support: support@company.com
+                        General: postmaster@torpmobel.no
                       </p>
                     </div>
                   </div>

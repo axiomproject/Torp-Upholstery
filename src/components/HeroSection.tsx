@@ -32,26 +32,6 @@ const HeroSection = ({ onNavigate }: HeroSectionProps) => {
           Delivering outstanding results through innovation, expertise, and unwavering commitment to our clients' success.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Button 
-            size="lg" 
-            className="gradient-accent text-accent-foreground hover:scale-105 transition-smooth shadow-elegant px-8 py-4 text-lg font-semibold"
-            onClick={() => onNavigate('services')}
-          >
-            Explore Our Services
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-          
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="border-2 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8 py-4 text-lg"
-            onClick={() => onNavigate('contact')}
-          >
-            <Play className="mr-2 h-5 w-5" />
-            Get In Touch
-          </Button>
-        </div>
 
         {/* Stats */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">

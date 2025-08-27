@@ -87,12 +87,14 @@ const ContactSection = () => {
               <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
                 <div className="text-center">
                   <MapPin className="w-16 h-16 text-accent mx-auto mb-4" />
-                  <h4 className="text-xl font-semibold text-primary mb-2">Business District Office</h4>
+                  <h4 className="text-xl font-semibold text-primary mb-2">Torp Upholstery</h4>
                   <p className="text-muted-foreground">
-                    123 Professional Avenue, Suite 456<br />
-                    Business City, BC 12345
+                    Visit us at our location
                   </p>
-                  <Button className="mt-4 gradient-accent text-accent-foreground">
+                  <Button 
+                    className="mt-4 gradient-accent text-accent-foreground"
+                    onClick={() => window.open('https://www.google.com/maps/place/Torp+Upholstery/data=!4m2!3m1!1s0x0:0xa5b57ba0fe81f5a4?sa=X&ved=1t:2428&hl=en-NO&ictx=111', '_blank')}
+                  >
                     Get Directions
                   </Button>
                 </div>
@@ -101,23 +103,66 @@ const ContactSection = () => {
           </Card>
         </div>
 
-        {/* Partners Section */}
+        {/* Customer Reviews */}
         <div className="mb-16">
-          <h3 className="text-2xl font-serif font-semibold text-primary mb-8 text-center">Our Partners</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {partners.map((partner, index) => (
-              <Card key={index} className="group hover:shadow-elegant transition-smooth border-0 shadow-card">
-                <CardContent className="p-6 text-center">
-                  <div className="w-12 h-12 mx-auto mb-4 gradient-primary rounded-lg flex items-center justify-center">
-                    <Building className="w-6 h-6 text-primary-foreground" />
+          <h3 className="text-2xl font-serif font-semibold text-primary mb-8 text-center">Customer Reviews</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="group hover:shadow-elegant transition-smooth border-0 shadow-card">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i}>⭐</span>
+                    ))}
                   </div>
-                  <h4 className="text-lg font-semibold text-primary mb-2">{partner.name}</h4>
-                  <Badge variant="secondary" className="mb-3">{partner.partnership}</Badge>
-                  <p className="text-muted-foreground text-sm mb-2">{partner.industry}</p>
-                  <p className="text-muted-foreground text-xs">{partner.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+                <p className="text-muted-foreground mb-4 italic">
+                  "Nice and smart people. know what they are doing!"
+                </p>
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-primary">Alex Lindberg</p>
+                  <p className="text-muted-foreground text-sm">1 year ago</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-elegant transition-smooth border-0 shadow-card">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i}>⭐</span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-muted-foreground mb-4 italic">
+                  "Good service reasonable price"
+                </p>
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-primary">Moustafa Abdzeto</p>
+                  <p className="text-muted-foreground text-sm">9 months ago</p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="group hover:shadow-elegant transition-smooth border-0 shadow-card">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="flex text-yellow-400">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i}>⭐</span>
+                    ))}
+                  </div>
+                </div>
+                <p className="text-muted-foreground mb-4 italic">
+                  "A nice upholsterer."
+                </p>
+                <div className="border-t pt-4">
+                  <p className="font-semibold text-primary">Odd Ragnar Rossing</p>
+                  <p className="text-muted-foreground text-sm">3 years ago</p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
@@ -153,11 +198,9 @@ const ContactSection = () => {
                       <Phone className="w-6 h-6 text-accent" />
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-primary mb-2">Phone Numbers</h4>
+                      <h4 className="text-lg font-semibold text-primary mb-2">Phone Number</h4>
                       <p className="text-muted-foreground">
-                        Main: +1 (555) 123-4567<br />
-                        Toll-Free: +1 (800) 123-4567<br />
-                        Fax: +1 (555) 123-4568
+                        +47 69 34 69 08
                       </p>
                     </div>
                   </div>
@@ -191,9 +234,8 @@ const ContactSection = () => {
                     <div>
                       <h4 className="text-lg font-semibold text-primary mb-2">Business Hours</h4>
                       <p className="text-muted-foreground">
-                        Monday - Friday: 9:00 AM - 6:00 PM<br />
-                        Saturday: 10:00 AM - 4:00 PM<br />
-                        Sunday: Closed
+                        Monday - Friday: 8:00 AM - 4:00 PM<br />
+                        Weekends: Closed
                       </p>
                     </div>
                   </div>

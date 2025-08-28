@@ -59,9 +59,7 @@ const Index = () => {
         <Reveal animation="fade-up">
           <EmployeesSection />
         </Reveal>
-        <Reveal animation="fade-up">
-          <ServicesSection onNavigate={handleNavigate} />
-        </Reveal>
+        <ServicesSection onNavigate={handleNavigate} />
         <Reveal animation="fade-up">
           <PicturesSection />
         </Reveal>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
@@ -13,6 +14,40 @@ interface ServicesSectionProps {
   onNavigate: (section: string) => void;
 }
 
+interface ImageWithFallbackProps {
+  src: string;
+  alt: string;
+  className: string;
+  IconComponent: any;
+}
+
+const ImageWithFallback = ({ src, alt, className, IconComponent }: ImageWithFallbackProps) => {
+  const [hasError, setHasError] = useState(false);
+
+  if (hasError) {
+    return (
+      <div className={`${className} bg-gradient-to-br from-accent/10 to-primary/10 flex items-center justify-center`}>
+        <div className="text-center">
+          <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto mb-2">
+            <IconComponent className="w-6 h-6 text-accent" />
+          </div>
+          <p className="text-sm text-muted-foreground">Image unavailable</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={className}
+      loading="lazy"
+      onError={() => setHasError(true)}
+    />
+  );
+};
+
 const ServicesSection = ({ onNavigate }: ServicesSectionProps) => {
   const services = [
     {
@@ -22,9 +57,8 @@ const ServicesSection = ({ onNavigate }: ServicesSectionProps) => {
       icon: Package,
       features: ['Upholstery removal and refit', 'Chairs, sofas, pillows, and benches', 'Careful labeling and protection', 'Ready for transport or repair'],
       color: 'text-accent',
-      image: 'https://images.unsplash.com/photo-1594910137478-e0f5d906ac6f?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      sourceUrl: 'https://images.unsplash.com/photo-1594910137478-e0f5d906ac6f?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      imageAlt: 'Worker removing upholstery from a chair'
+      image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1600',
+      imageAlt: 'Interior design of home'
     },
     {
       id: 2,
@@ -34,7 +68,6 @@ const ServicesSection = ({ onNavigate }: ServicesSectionProps) => {
       features: ['Seat and back cushion restuffing', 'High‑density foam and fiber fill', 'Shape and support restoration', 'Optional firmness levels'],
       color: 'text-primary',
       image: 'https://images.pexels.com/photos/33591729/pexels-photo-33591729.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      sourceUrl: 'https://www.pexels.com/photo/cozy-modern-cafe-interior-with-seating-area-33591729/',
       imageAlt: 'Cozy interior seating suitable for upholstery restuffing inspiration'
     },
     {
@@ -45,7 +78,6 @@ const ServicesSection = ({ onNavigate }: ServicesSectionProps) => {
       features: ['Frame and spring repairs', 'Seam and stitching fixes', 'Foam replacement', 'Minor refinishing touch‑ups'],
       color: 'text-accent',
       image: 'https://images.pexels.com/photos/5095274/pexels-photo-5095274.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      sourceUrl: 'https://www.pexels.com/photo/person-holding-black-leather-shoe-5095274/',
       imageAlt: 'Close-up repair work illustrating craftsmanship'
     },
     {
@@ -56,7 +88,6 @@ const ServicesSection = ({ onNavigate }: ServicesSectionProps) => {
       features: ['Custom boat pillows and seats', 'Marine‑grade fabrics and foam', 'Canvas and stitching repairs', 'Boat cable repair'],
       color: 'text-primary',
       image: 'https://images.pexels.com/photos/803946/pexels-photo-803946.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      sourceUrl: 'https://www.pexels.com/photo/white-and-maroon-jon-boat-on-seashore-803946/',
       imageAlt: 'Boat by the seashore with marine upholstery needs'
     },
     {
@@ -67,7 +98,6 @@ const ServicesSection = ({ onNavigate }: ServicesSectionProps) => {
       features: ['Custom sizes and profiles', 'Multiple densities and firmness levels', 'Templates and pattern cutting', 'Fast in‑house turnaround'],
       color: 'text-accent',
       image: 'https://images.pexels.com/photos/10000114/pexels-photo-10000114.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      sourceUrl: 'https://www.pexels.com/photo/a-man-making-a-surfboard-10000114/',
       imageAlt: 'Foam cutting process in a workshop'
     }
   ];
@@ -96,23 +126,12 @@ const ServicesSection = ({ onNavigate }: ServicesSectionProps) => {
               >
                 <CardHeader className="pb-4">
                   <div className="mb-4 overflow-hidden rounded-lg aspect-[16/9] bg-muted">
-                    {service.sourceUrl ? (
-                      <a href={service.sourceUrl} target="_blank" rel="noopener noreferrer">
-                        <img
-                          src={service.image}
-                          alt={service.imageAlt}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
-                          loading="lazy"
-                        />
-                      </a>
-                    ) : (
-                      <img
-                        src={service.image}
-                        alt={service.imageAlt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
-                        loading="lazy"
-                      />
-                    )}
+                    <ImageWithFallback
+                      src={service.image}
+                      alt={service.imageAlt}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-smooth"
+                      IconComponent={IconComponent}
+                    />
                   </div>
                   <div className={`w-12 h-12 ${service.color} bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-smooth`}>
                     <IconComponent className="w-6 h-6" />
